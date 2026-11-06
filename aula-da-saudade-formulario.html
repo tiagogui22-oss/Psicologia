@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><script src="https://myhub.ia.br/canvas-vendor/tailwind.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aula da Saudade - Eleições da Turma</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: linear-gradient(135deg, #fef3c7, #fbcfe8 50%, #c7d2fe);
+    min-height: 100vh;
+    color: #1f2937;
+    padding: 24px 16px;
+  }
+  .container { max-width: 640px; margin: 0 auto; }
+  header { text-align: center; margin-bottom: 24px; }
+  header h1 { font-size: 2rem; margin: 0 0 6px; color: #7c2d12; }
+  header p { margin: 0; color: #4b5563; }
+  .card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+  }
+  label { display: block; font-weight: 600; margin-bottom: 6px; }
+  .hint { font-size: 0.85rem; color: #6b7280; margin: 2px 0 10px; }
+  input[type="text"], select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 1rem;
+    background: #ffffff;
+    margin-bottom: 12px;
+  }
+  input[type="text"]:focus, select:focus { outline: none; border-color: #f97316; box-shadow: 0 0 0 3px #fed7aa; }
+  .categoria { padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid #f3e8e0; }
+  .categoria:last-of-type { border-bottom: none; margin-bottom: 0; }
+  .cat-title { font-size: 1.1rem; font-weight: 700; color: #9a3412; margin: 0 0 10px; }
+  .cat-emoji { font-size: 1.4rem; margin-right: 6px; }
+  button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: #ea580c;
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  button:hover { background: #c2410c; }
+  .msg {
+    display: none;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: #dcfce7;
+    color: #166534;
+    font-weight: 600;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  .msg.erro { background: #fee2e2; color: #991b1b; }
+  .msg.show { display: block; }
+  .resultado-cat { margin-bottom: 16px; }
+  .resultado-cat h3 { margin: 0 0 6px; font-size: 1rem; color: #7c2d12; }
+  .resultado-cat ul { margin: 0; padding-left: 20px; }
+  .resultado-cat li { margin: 2px 0; }
+  .vazio { color: #6b7280; font-style: italic; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <h1>🎓 Aula da Saudade</h1>
+    <p>Vote nos seus colegas de turma!</p>
+  </header>
+
+  <div class="card">
+    <form id="form-votacao" novalidate>
+      <label for="votante">Seu nome (opcional)</label>
+      <input type="text" id="votante" placeholder="Quem está votando?" />
+
+      <div id="categorias"></div>
+
+      <button type="submit">Enviar votos</button>
+    </form>
+  </div>
+
+  <div class="msg" id="mensagem"></div>
+
+  <div class="card">
+    <h2 style="margin-top:0; color:#7c2d12;">📊 Resultados parciais</h2>
+    <p class="hint">Pontuação: 1º lugar = 3 pts · 2º lugar = 2 pts · 3º lugar = 1 pt</p>
+    <div id="resultados"></div>
+  </div>
+
+</div>
+
+<script>
+  // Pessoas que podem ser escolhidas
+  const PESSOAS = [
+    "Anne Beatriz Sena",
+    "Izabella Barbosa Primo",
+    "Jaine Lopes da Silva",
+    "Vívian Nunes Vieira",
+    "Tiago Lopes Guimarães",
+    "Annalu Lopes Rodrigues",
+    "Maria Eduarda Gonçalves",
+    "João Batista Vieira de Souza",
+    "Luiza Carvalho Silva"
+  ];
+
+  // Categorias do formulário. Para adicionar mais, inclua um novo objeto aqui.
+  const CATEGORIAS = [
+    { id: "mais-engracado", emoji: "😂", titulo: "Mais engraçado da turma" },
+    { id: "o-que-mais-falta", emoji: "💭", titulo: "O que mais falta" },
+    { id: "nao-consegue-ficar-quieto", emoji: "🗣️", titulo: "O que não consegue ficar quieto" },
+    { id: "mais-organizado", emoji: "📋", titulo: "O mais organizado" },
+    { id: "mestre-das-apresentacoes", emoji: "🎤", titulo: "O mestre das apresentações" },
+    { id: "mais-fofoqueiro", emoji: "🤫", titulo: "O mais fofoqueiro da sala" }
+  ];
+
+  const POSICOES = [
+    { num: 1, label: "🥇 1º lugar", pontos: 3 },
+    { num: 2, label: "🥈 2º lugar", pontos: 2 },
+    { num: 3, label: "🥉 3º lugar", pontos: 1 }
+  ];
+
+  // Votos guardados apenas em memória: { categoriaId: { pessoa: { 1: n, 2: n, 3: n } } }
+  const votos = {};
+  CATEGORIAS.forEach(c => {
+    votos[c.id] = {};
+    PESSOAS.forEach(p => votos[c.id][p] = { 1: 0, 2: 0, 3: 0 });
+  });
+
+  const formEl = document.getElementById("form-votacao");
+  const categoriasEl = document.getElementById("categorias");
+  const mensagemEl = document.getElementById("mensagem");
+  const resultadosEl = document.getElementById("resultados");
+
+  // Monta os campos de cada categoria (3 posições por categoria)
+  function montarFormulario() {
+    categoriasEl.innerHTML = CATEGORIAS.map(c => `
+      <div class="categoria">
+        <p class="cat-title"><span class="cat-emoji">${c.emoji}</span>${c.titulo}</p>
+        ${POSICOES.map(p => `
+          <label for="${c.id}-${p.num}">${p.label}</label>
+          <select id="${c.id}-${p.num}" data-cat="${c.id}">
+            <option value="">Selecione...</option>
+            ${PESSOAS.map(n => `<option value="${escapar(n)}">${escapar(n)}</option>`).join("")}
+          </select>
+        `).join("")}
+      </div>
+    `).join("");
+  }
+
+  // Desabilita, em cada categoria, as pessoas já escolhidas em outra posição
+  function atualizarOpcoes(catId) {
+    const selects = Array.from(document.querySelectorAll(`select[data-cat="${catId}"]`));
+    const escolhidos = selects.map(s => s.value).filter(Boolean);
+    selects.forEach(s => {
+      Array.from(s.options).forEach(o => {
+        if (!o.value) return;
+        o.disabled = escolhidos.includes(o.value) && o.value !== s.value;
+      });
+    });
+  }
+
+  function atualizarTodasOpcoes() {
+    CATEGORIAS.forEach(c => atualizarOpcoes(c.id));
+  }
+
+  categoriasEl.addEventListener("change", (e) => {
+    if (e.target.tagName === "SELECT") atualizarOpcoes(e.target.dataset.cat);
+  });
+
+  function escapar(texto) {
+    const div = document.createElement("div");
+    div.textContent = texto;
+    return div.innerHTML;
+  }
+
+  function mostrarMensagem(texto, tipo) {
+    mensagemEl.textContent = texto;
+    mensagemEl.className = "msg show" + (tipo === "erro" ? " erro" : "");
+    setTimeout(() => { mensagemEl.className = "msg"; }, 4000);
+  }
+
+  function atualizarResultados() {
+    resultadosEl.innerHTML = CATEGORIAS.map(c => {
+      const linhas = PESSOAS
+        .map(p => {
+          const v = votos[c.id][p];
+          const pontos = v[1] * 3 + v[2] * 2 + v[3] * 1;
+          return { p, v, pontos };
+        })
+        .filter(x => x.pontos > 0)
+        .sort((a, b) => b.pontos - a.pontos);
+
+      const lista = linhas.length
+        ? `<ul>${linhas.map(x =>
+            `<li>${escapar(x.p)} — 🥇 ${x.v[1]} · 🥈 ${x.v[2]} · 🥉 ${x.v[3]} (${x.pontos} pts)</li>`
+          ).join("")}</ul>`
+        : `<p class="vazio">Nenhum voto ainda.</p>`;
+
+      return `<div class="resultado-cat"><h3>${c.emoji} ${c.titulo}</h3>${lista}</div>`;
+    }).join("");
+  }
+
+  formEl.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const registros = [];
+
+    for (const c of CATEGORIAS) {
+      const escolhas = POSICOES.map(p =>
+        document.getElementById(`${c.id}-${p.num}`).value
+      );
+      const preenchidos = escolhas.filter(Boolean).length;
+
+      if (preenchidos === 0) continue;
+
+      if (preenchidos < 3) {
+        mostrarMensagem(`Complete os 3 lugares da categoria "${c.titulo}" ou deixe-a vazia.`, "erro");
+        return;
+      }
+
+      registros.push({ cat: c.id, escolhas });
+    }
+
+    if (registros.length === 0) {
+      mostrarMensagem("Escolha os 3 colocados em pelo menos uma categoria.", "erro");
+      return;
+    }
+
+    registros.forEach(r => {
+      r.escolhas.forEach((nome, i) => {
+        votos[r.cat][nome][i + 1]++;
+      });
+    });
+
+    const votante = document.getElementById("votante").value.trim();
+
+    formEl.reset();
+    atualizarTodasOpcoes();
+    mostrarMensagem(`Obrigado${votante ? ", " + votante : ""}! ${registros.length} categoria(s) registrada(s). 🎉`);
+    atualizarResultados();
+  });
+
+  montarFormulario();
+  atualizarResultados();
+</script>
+</body>
+</html>
