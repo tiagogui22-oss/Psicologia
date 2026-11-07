@@ -83,7 +83,7 @@
   <div class="card">
     <form id="form-votacao" novalidate>
       <label for="votante">Seu nome (opcional)</label>
-      <input type="text" id="votante" placeholder="Quem está votando?" />
+      <input type="text" id="votante" name="votante" placeholder="Quem está votando?" />
 
       <div id="categorias"></div>
 
@@ -150,7 +150,7 @@
         <p class="cat-title"><span class="cat-emoji">${c.emoji}</span>${c.titulo}</p>
         ${POSICOES.map(p => `
           <label for="${c.id}-${p.num}">${p.label}</label>
-          <select id="${c.id}-${p.num}" data-cat="${c.id}">
+          <select id="${c.id}-${p.num}" name="${c.id}-${p.num}" data-cat="${c.id}">
             <option value="">Selecione...</option>
             ${PESSOAS.map(n => `<option value="${escapar(n)}">${escapar(n)}</option>`).join("")}
           </select>
@@ -245,6 +245,7 @@
     });
 
     const votante = document.getElementById("votante").value.trim();
+    enviarParaPlanilha(votante, registros);
 
     formEl.reset();
     atualizarTodasOpcoes();
@@ -254,6 +255,30 @@
 
   montarFormulario();
   atualizarResultados();
+</script>
+<script>
+  // Cole aqui a URL do Apps Script (termina em /exec)
+  const URL_PLANILHA = "https://script.google.com/macros/s/AKfycbyyF8tX1zVTpgr47SvxmX7syy_U_7_yp_1_EoVycaHvD8fTm_I8E0Pd6Hvls1ZOaTtw/exec";
+
+  // Envia os votos para o Google Planilhas sem recarregar a página
+  function enviarParaPlanilha(votante, registros) {
+    const dados = {
+      votante: votante || "Anônimo",
+      registros: registros.map(r => ({
+        categoria: CATEGORIAS.find(c => c.id === r.cat).titulo,
+        primeiro: r.escolhas[0],
+        segundo: r.escolhas[1],
+        terceiro: r.escolhas[2]
+      }))
+    };
+
+    fetch(URL_PLANILHA, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(dados)
+    }).catch(() => {});
+  }
 </script>
 </body>
 </html>
