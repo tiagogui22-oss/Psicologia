@@ -83,7 +83,7 @@
       <div class="reveal grid lg:grid-cols-[300px_1fr] gap-6 items-start">
         <aside class="lg:sticky lg:top-24 relative overflow-hidden rounded-2xl bg-gradient-to-b from-indigo-600 to-purple-700 text-white p-6 text-center shadow-xl">
           <span class="blob absolute -top-8 -right-8 w-32 h-32 rounded-full bg-white/10 blur-xl"></span>
-          <img src="imagens/freud.jpg" alt="Sigmund Freud" class="relative mx-auto w-56 lg:w-full drop-shadow-2xl transition-transform duration-500 hover:scale-105" style="animation: flutuar 6s ease-in-out infinite">
+          <img src="imagens/freud.png" alt="Sigmund Freud" class="relative mx-auto w-56 lg:w-full drop-shadow-2xl transition-transform duration-500 hover:scale-105" style="animation: flutuar 6s ease-in-out infinite">
           <p class="relative font-extrabold text-xl mt-4">Sigmund Freud</p>
           <p class="relative text-indigo-200 text-sm">1856 – 1939 · Viena, Áustria</p>
 <p class="relative text-indigo-300 text-xs mt-2">Foto: Wikipédia (ver licença no arquivo original)</p>
@@ -189,7 +189,7 @@
   <div id="tela-preta" style="display:none;position:fixed;inset:0;z-index:80;background:#000;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;">
     <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:28px;max-width:960px;width:100%;">
       <div style="display:flex;flex-direction:column;align-items:center;gap:14px;flex:0 0 auto;">
-        <img id="freud-final" src="imagens/freud.jpg" alt="Sigmund Freud" style="width:260px;max-width:70vw;filter:drop-shadow(0 0 30px rgba(129,140,248,.6));">
+        <img id="freud-final" src="imagens/freud.png" alt="Sigmund Freud" style="width:260px;max-width:70vw;filter:drop-shadow(0 0 30px rgba(129,140,248,.6));">
         <button id="btn-restaurar" style="display:none;position:relative;z-index:100;background:#fff;color:#4338ca;font-weight:700;padding:12px 28px;border-radius:999px;cursor:pointer;box-shadow:0 0 25px rgba(129,140,248,.7);">Restaurar a página</button>
       </div>
       <div style="flex:1 1 320px;max-width:520px;background:rgba(255,255,255,.05);border:1px solid rgba(129,140,248,.3);border-radius:16px;padding:20px;color:#e2e8f0;text-align:left;">
@@ -642,7 +642,7 @@
     const d = document.createElement("div");
     const frase = frasesFreud[Math.floor(Math.random() * frasesFreud.length)];
     d.style.cssText = `position:fixed;z-index:95;pointer-events:none;display:flex;align-items:center;gap:8px;left:${10 + Math.random() * 70}vw;top:${15 + Math.random() * 55}vh;`;
-    d.innerHTML = `<img src="imagens/freud.jpg" alt="Freud" style="width:76px;height:76px;object-fit:contain;background:#fff;border-radius:50%;border:3px solid #6366f1;padding:4px;"><span style="background:#fff;color:#312e81;padding:8px 12px;border-radius:14px;font-weight:600;font-size:14px;box-shadow:0 8px 20px rgba(0,0,0,.35);max-width:200px;">${frase}</span>`;
+    d.innerHTML = `<img src="imagens/freud.png" alt="Freud" style="width:76px;height:76px;object-fit:contain;background:#fff;border-radius:50%;border:3px solid #6366f1;padding:4px;"><span style="background:#fff;color:#312e81;padding:8px 12px;border-radius:14px;font-weight:600;font-size:14px;box-shadow:0 8px 20px rgba(0,0,0,.35);max-width:200px;">${frase}</span>`;
     document.body.appendChild(d);
     d.animate([
       { transform: "scale(0) rotate(-20deg)", opacity: 0 },
