@@ -1,0 +1,844 @@
+<!doctype html><html><head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script src="https://myhub.ia.br/canvas-vendor/tailwind.js"></script>
+    <style>body{margin:0;padding:16px;box-sizing:border-box;font-family:system-ui,sans-serif;}</style>
+    </head><body><div class="min-h-screen bg-slate-50 text-slate-800 font-sans">
+
+  <!-- barra de progresso de leitura -->
+  <div id="barra-progresso" class="fixed top-0 left-0 h-1 w-0 z-50 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
+
+  <header class="relative overflow-hidden bg-animado bg-gradient-to-r from-indigo-700 via-purple-700 to-indigo-700 text-white py-14 px-6 text-center">
+  <svg class="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g fill="#ffffff" opacity="0.16">
+      <circle cx="120" cy="150" r="28"/><rect x="92" y="182" width="56" height="118" rx="24"/>
+      <circle cx="300" cy="120" r="34"/><rect x="266" y="158" width="68" height="142" rx="28"/>
+      <circle cx="500" cy="165" r="24"/><rect x="476" y="194" width="48" height="106" rx="20"/>
+      <circle cx="700" cy="135" r="30"/><rect x="670" y="170" width="60" height="130" rx="26"/>
+      <circle cx="900" cy="155" r="26"/><rect x="874" y="186" width="52" height="114" rx="22"/>
+      <circle cx="1080" cy="125" r="32"/><rect x="1046" y="162" width="64" height="138" rx="26"/>
+      <circle cx="200" cy="262" r="18"/>
+      <circle cx="600" cy="60" r="20"/><line x1="600" y1="80" x2="600" y2="130" stroke="#ffffff" stroke-width="2"/>
+    </g>
+  </svg>
+    <span class="blob absolute -top-10 -left-10 w-48 h-48 rounded-full bg-white/10 blur-2xl"></span>
+    <span class="blob blob-2 absolute -bottom-12 right-0 w-64 h-64 rounded-full bg-pink-400/20 blur-3xl"></span>
+    <div class="relative">
+      <p class="entrada uppercase tracking-widest text-indigo-200 text-sm mb-2" style="animation-delay:0.1s">Desenvolvimento Humano</p>
+      <h1 class="entrada text-3xl md:text-4xl font-bold mb-3" style="animation-delay:0.25s">Desenvolvimento Psicossexual Infantil</h1>
+      <p class="entrada max-w-2xl mx-auto text-indigo-100" style="animation-delay:0.4s">Uma análise da infância sob a perspectiva psicanalítica de Sigmund Freud</p>
+      <a href="#fases" class="entrada inline-block mt-8 text-sm text-indigo-200 animate-bounce">↓ Explore a página</a>
+    </div>
+  </header>
+
+  <nav class="sticky top-0 z-20 bg-white shadow-sm overflow-x-auto">
+    <ul class="flex gap-2 px-4 py-3 whitespace-nowrap text-sm font-medium">
+      <li><a href="#intro" class="nav-link px-3 py-1.5 rounded-full text-indigo-700">Introdução</a></li>
+      <li><a href="#freud" class="nav-link px-3 py-1.5 rounded-full text-indigo-700">Quem é Freud</a></li>
+      <li><a href="#fases" class="nav-link px-3 py-1.5 rounded-full text-indigo-700">Fases</a></li>
+      <li><a href="#estrutura" class="nav-link px-3 py-1.5 rounded-full text-indigo-700">Personalidade</a></li>
+      <li><a href="#curiosidades" class="nav-link px-3 py-1.5 rounded-full text-indigo-700">Curiosidades</a></li>
+      <li><a href="#quiz" class="nav-link px-3 py-1.5 rounded-full text-indigo-700">Quiz</a></li>
+      <li><a href="#conclusao" class="nav-link px-3 py-1.5 rounded-full text-indigo-700">Conclusão</a></li>
+    </ul>
+  </nav>
+
+  <main class="max-w-5xl mx-auto px-5 py-10 space-y-20">
+
+    <!-- INTRODUÇÃO -->
+    <section id="intro" class="scroll-mt-24">
+      <h2 class="reveal text-2xl font-bold text-indigo-800 mb-4">Introdução</h2>
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="reveal card-hover bg-white rounded-2xl p-6 shadow-sm">
+          <h3 class="font-semibold mb-2">Contextualização</h3>
+          <p class="text-slate-600">O desenvolvimento infantil é um processo contínuo que envolve aspectos físicos, cognitivos, emocionais e sociais.</p>
+        </div>
+        <div class="reveal card-hover bg-white rounded-2xl p-6 shadow-sm" style="transition-delay:0.1s">
+          <h3 class="font-semibold mb-2">Importância das experiências</h3>
+          <p class="text-slate-600">As vivências dos primeiros anos moldam a forma como a criança sente, pensa e se relaciona ao longo da vida.</p>
+        </div>
+        <div class="reveal card-hover bg-white rounded-2xl p-6 shadow-sm" style="transition-delay:0.2s">
+          <h3 class="font-semibold mb-2">Primeiras relações afetivas</h3>
+          <p class="text-slate-600">O vínculo com os cuidadores é a base da segurança emocional e influencia as relações futuras.</p>
+        </div>
+        <div class="reveal card-hover bg-white rounded-2xl p-6 shadow-sm" style="transition-delay:0.3s">
+          <h3 class="font-semibold mb-2">Psicanálise como perspectiva</h3>
+          <p class="text-slate-600">A psicanálise entende que impulsos inconscientes e conflitos da infância participam da formação da personalidade.</p>
+        </div>
+      </div>
+
+      <div class="reveal mt-6 bg-indigo-50 border border-indigo-100 rounded-2xl p-6">
+        <h3 class="font-semibold text-indigo-800 mb-3">Objetivos</h3>
+        <ul class="grid md:grid-cols-2 gap-2 text-slate-700">
+          <li class="item-lista">Compreender o desenvolvimento infantil.</li>
+          <li class="item-lista" style="transition-delay:0.1s">Identificar comportamentos infantis.</li>
+          <li class="item-lista" style="transition-delay:0.2s">Relacionar observações à teoria de Freud.</li>
+          <li class="item-lista" style="transition-delay:0.3s">Refletir sobre a formação da personalidade.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- FREUD -->
+    <section id="freud" class="scroll-mt-24">
+      <h2 class="reveal text-2xl font-bold text-indigo-800 mb-4">Quem foi Sigmund Freud?</h2>
+      <div class="reveal grid lg:grid-cols-[300px_1fr] gap-6 items-start">
+        <aside class="lg:sticky lg:top-24 relative overflow-hidden rounded-2xl bg-gradient-to-b from-indigo-600 to-purple-700 text-white p-6 text-center shadow-xl">
+          <span class="blob absolute -top-8 -right-8 w-32 h-32 rounded-full bg-white/10 blur-xl"></span>
+          <img src="imagens/freud.jpg" alt="Sigmund Freud" class="relative mx-auto w-56 lg:w-full drop-shadow-2xl transition-transform duration-500 hover:scale-105" style="animation: flutuar 6s ease-in-out infinite">
+          <p class="relative font-extrabold text-xl mt-4">Sigmund Freud</p>
+          <p class="relative text-indigo-200 text-sm">1856 – 1939 · Viena, Áustria</p>
+<p class="relative text-indigo-300 text-xs mt-2">Foto: Wikipédia (ver licença no arquivo original)</p>
+          <div class="relative mt-4 flex flex-wrap justify-center gap-2 text-xs">
+            <span class="bg-white/15 rounded-full px-3 py-1">Neurologista</span>
+            <span class="bg-white/15 rounded-full px-3 py-1">Psicanalista</span>
+          </div>
+        </aside>
+        <div class="space-y-5">
+          <p class="text-slate-600 bg-white rounded-2xl p-5 shadow-sm">Sigmund Freud foi um médico neurologista austríaco, considerado o criador da <strong>Psicanálise</strong>. Trabalhando com pacientes com sintomas emocionais, desenvolveu um método baseado na fala livre e na interpretação de sonhos e lembranças.</p>
+          <div id="freud-botoes" class="flex flex-wrap gap-3"></div>
+          <div id="freud-painel" class="relative overflow-hidden bg-white rounded-2xl p-6 shadow-sm min-h-[180px] border-l-8 border-indigo-500"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FASES -->
+    <section id="fases" class="scroll-mt-24">
+      <h2 class="reveal text-2xl font-bold text-indigo-800 mb-2">Fases do desenvolvimento psicossexual</h2>
+      <p class="reveal text-slate-600 mb-6">Clique em uma fase para ver mais detalhes.</p>
+      <div class="reveal mb-4 h-2 bg-indigo-100 rounded-full overflow-hidden">
+        <div id="fases-progresso" class="h-full bg-gradient-to-r from-sky-500 via-amber-500 to-rose-500 rounded-full transition-all duration-500" style="width:0%"></div>
+      </div>
+      <div id="fases-botoes" class="reveal flex flex-wrap gap-3 mb-6"></div>
+      <div id="fase-detalhe" class="bg-white rounded-2xl p-6 shadow-sm border-l-8 border-indigo-500"></div>
+    </section>
+
+    <!-- ESTRUTURA -->
+    <section id="estrutura" class="scroll-mt-24">
+      <h2 class="reveal text-2xl font-bold text-indigo-800 mb-2">Estrutura da personalidade</h2>
+      <p class="reveal text-slate-600 mb-6">Freud dividiu a personalidade em três instâncias. Clique para explorar.</p>
+      <div class="grid md:grid-cols-3 gap-5" id="instancias"></div>
+      <div id="area-botao-perigo" class="mt-8 flex justify-center min-h-[64px]"></div>
+    </section>
+
+    <!-- CURIOSIDADES -->
+    <section id="curiosidades" class="scroll-mt-24">
+      <h2 class="reveal text-2xl font-bold text-indigo-800 mb-4">Curiosidades</h2>
+      <div class="reveal relative overflow-hidden bg-gradient-to-br from-purple-600 to-indigo-600 text-white rounded-2xl p-8 shadow-lg min-h-[200px] flex flex-col justify-between">
+        <span class="blob absolute -right-8 -top-8 w-32 h-32 rounded-full bg-white/10"></span>
+        <p id="curiosidade-texto" class="relative text-lg leading-relaxed transition-opacity duration-300"></p>
+        <div class="relative flex items-center justify-between mt-6">
+          <span id="curiosidade-contador" class="text-indigo-200 text-sm"></span>
+          <button id="btn-curiosidade" class="bg-white text-indigo-700 font-semibold px-5 py-2 rounded-full hover:scale-105 active:scale-95 transition-transform">Próxima curiosidade</button>
+        </div>
+        <div class="relative mt-4 h-1 bg-white/20 rounded-full overflow-hidden">
+          <div id="curiosidade-barra" class="h-full bg-white rounded-full" style="width:0%"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quiz" class="scroll-mt-24">
+      <div class="reveal flex flex-col md:flex-row md:items-end md:justify-between gap-3 mb-4">
+        <div>
+          <h2 class="text-2xl font-bold text-indigo-800">Quiz: Verdadeiro ou Falso</h2>
+          <p class="text-slate-600">Escolha uma resposta e veja a explicação.</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <span class="font-semibold text-indigo-700">Pontuação: <span id="pontuacao" class="inline-block">0</span> / <span id="total-questoes">0</span></span>
+          <button id="btn-reiniciar" class="border border-indigo-300 text-indigo-700 px-4 py-1.5 rounded-full hover:bg-indigo-50 hover:scale-105 active:scale-95 transition-transform">Reiniciar</button>
+        </div>
+      </div>
+      <div class="mb-6 h-2 bg-indigo-100 rounded-full overflow-hidden">
+        <div id="quiz-progresso" class="h-full bg-gradient-to-r from-emerald-500 to-indigo-500 rounded-full transition-all duration-500" style="width:0%"></div>
+      </div>
+      <div id="quiz-container" class="space-y-6"></div>
+      <div id="resultado-final" class="hidden mt-8 bg-white rounded-2xl p-6 shadow-sm text-center">
+        <h3 class="text-xl font-bold text-indigo-800 mb-2">Quiz concluído!</h3>
+        <p id="resultado-texto" class="text-slate-600"></p>
+      </div>
+    </section>
+
+    <!-- CONCLUSÃO -->
+    <section id="conclusao" class="scroll-mt-24">
+      <h2 class="reveal text-2xl font-bold text-indigo-800 mb-4">Conclusão</h2>
+      <div class="reveal bg-white rounded-2xl p-6 shadow-sm text-slate-600 space-y-3">
+        <p>A teoria psicossexual de Freud oferece uma base para compreender como experiências da infância, especialmente as relacionadas ao prazer, à frustração e às relações com os cuidadores, participam da formação da personalidade.</p>
+        <p>Embora muitas de suas ideias sejam debatidas e revisadas por pesquisas contemporâneas, sua contribuição permanece central para o estudo do desenvolvimento humano.</p>
+      </div>
+    </section>
+
+    <section id="referencias" class="scroll-mt-24">
+      <h2 class="reveal text-xl font-bold text-indigo-800 mb-3">Referências</h2>
+      <ul class="reveal text-sm text-slate-600 space-y-2 list-disc list-inside">
+        <li>FREUD, S. <em>A interpretação dos sonhos</em>. 1900.</li>
+        <li>FREUD, S. <em>Três ensaios sobre a teoria da sexualidade</em>. 1905.</li>
+        <li>FREUD, S. <em>O ego e o id</em>. 1923.</li>
+        <li>LAPLANCHE, J.; PONTALIS, J.-B. <em>Vocabulário da psicanálise</em>. São Paulo: Martins Fontes.</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Contagem regressiva -->
+  <div id="contagem" style="display:none;position:fixed;inset:0;z-index:90;align-items:center;justify-content:center;pointer-events:none;background:rgba(0,0,0,.45);">
+    <span id="contagem-num" style="font-size:12rem;font-weight:900;color:#fff;text-shadow:0 0 30px rgba(248,113,113,.9);"></span>
+  </div>
+
+  <!-- Efeitos de explosão -->
+  <div id="fx-camada" style="position:fixed;inset:0;z-index:85;pointer-events:none;overflow:hidden;"></div>
+
+  <!-- Tela preta com Freud -->
+  <div id="tela-preta" style="display:none;position:fixed;inset:0;z-index:80;background:#000;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:28px;max-width:960px;width:100%;">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px;flex:0 0 auto;">
+        <img id="freud-final" src="imagens/freud.jpg" alt="Sigmund Freud" style="width:260px;max-width:70vw;filter:drop-shadow(0 0 30px rgba(129,140,248,.6));">
+        <button id="btn-restaurar" style="display:none;position:relative;z-index:100;background:#fff;color:#4338ca;font-weight:700;padding:12px 28px;border-radius:999px;cursor:pointer;box-shadow:0 0 25px rgba(129,140,248,.7);">Restaurar a página</button>
+      </div>
+      <div style="flex:1 1 320px;max-width:520px;background:rgba(255,255,255,.05);border:1px solid rgba(129,140,248,.3);border-radius:16px;padding:20px;color:#e2e8f0;text-align:left;">
+        <p style="font-weight:700;color:#a5b4fc;margin-bottom:8px;">Sigmund Freud explica</p>
+        <p id="freud-explicacao" style="line-height:1.6;min-height:100px;"></p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="bg-slate-900 text-slate-400 text-center text-sm py-6">
+    Trabalho de Desenvolvimento Humano · Apresentação do grupo
+  </footer>
+</div>
+
+<style>
+  @keyframes entrada { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+  @keyframes flutuar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+  @keyframes gradiente { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+  @keyframes tremer { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-6px); } 80% { transform: translateX(6px); } }
+  @keyframes surgir { from { opacity: 0; transform: translateY(12px) scale(0.98); } to { opacity: 1; transform: none; } }
+  @keyframes pulsar { 0% { transform: scale(1); } 50% { transform: scale(1.25); } 100% { transform: scale(1); } }
+  @keyframes barra { from { width: 0%; } to { width: 100%; } }
+
+  .entrada { animation: entrada 0.8s ease both; }
+  .blob { animation: flutuar 6s ease-in-out infinite; }
+  .blob-2 { animation-delay: -3s; }
+  .bg-animado { background-size: 200% 200%; animation: gradiente 10s ease infinite; }
+  .animate-bounce { animation: flutuar 2s ease-in-out infinite; }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visivel { opacity: 1; transform: none; }
+
+  .item-lista { opacity: 0; transform: translateX(-12px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .reveal.visivel .item-lista, .visivel > .item-lista { opacity: 1; transform: none; }
+
+  .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  .card-hover:hover { transform: translateY(-6px); box-shadow: 0 16px 30px -12px rgba(79, 70, 229, 0.35); }
+
+  .nav-link { transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease; }
+  .nav-link:hover { background-color: #e0e7ff; transform: translateY(-2px); }
+  .nav-link.ativo { background-color: #4338ca; color: #fff; }
+
+  .btn-fase { transition: transform 0.2s ease, background-color 0.3s ease, color 0.3s ease; }
+  .btn-fase:hover { transform: translateY(-3px) scale(1.04); }
+  .btn-fase:active { transform: scale(0.96); }
+
+  .painel-surgir { animation: surgir 0.5s ease both; }
+  .tremer { animation: tremer 0.5s ease; }
+  .pulsar { animation: pulsar 0.5s ease; }
+
+  .instancia-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+  .instancia-card:hover { transform: translateY(-6px) rotate(-0.5deg); box-shadow: 0 16px 30px -12px rgba(79, 70, 229, 0.35); }
+  .bolha { transition: transform 0.4s ease; }
+  .instancia-card:hover .bolha { transform: scale(1.15) rotate(12deg); }
+  .instancia-texto { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.5s ease, opacity 0.4s ease, margin 0.4s ease; }
+  .instancia-texto.aberto { max-height: 240px; opacity: 1; margin-top: 0.5rem; }
+
+  .barra-anim { animation: barra 7s linear forwards; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal, .item-lista { opacity: 1; transform: none; }
+  }
+</style>
+
+<script>
+  // ---------- BARRA DE PROGRESSO DE LEITURA ----------
+  const barraProgresso = document.getElementById("barra-progresso");
+  window.addEventListener("scroll", () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    barraProgresso.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + "%";
+  }, { passive: true });
+
+  // ---------- REVELAR AO ROLAR ----------
+  const observadorRevelar = new IntersectionObserver((entradas) => {
+    entradas.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add("visivel");
+        observadorRevelar.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll(".reveal").forEach(el => observadorRevelar.observe(el));
+
+  // ---------- CONTADORES ----------
+  function animarContador(el) {
+    const alvo = Number(el.dataset.target);
+    const inicio = performance.now();
+    const duracao = 1400;
+    function passo(agora) {
+      const p = Math.min((agora - inicio) / duracao, 1);
+      el.textContent = Math.round(alvo * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(passo);
+    }
+    requestAnimationFrame(passo);
+  }
+  const observadorContador = new IntersectionObserver((entradas) => {
+    entradas.forEach(e => {
+      if (e.isIntersecting) {
+        animarContador(e.target);
+        observadorContador.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll(".counter").forEach(el => observadorContador.observe(el));
+
+  // ---------- FREUD (painel interativo) ----------
+  const freudTopicos = [
+    { titulo: "Biografia", icone: "📖", cor: "border-indigo-500",
+      corpo: "Nasceu em 1856, na Morávia, e cresceu em Viena. Formou-se em medicina e atendeu pacientes com sintomas emocionais, desenvolvendo o método da fala livre." },
+    { titulo: "Criação da Psicanálise", icone: "🛋️", cor: "border-purple-500",
+      corpo: "A Psicanálise nasceu da clínica. Em 1900, Freud publicou <em>A Interpretação dos Sonhos</em>, obra considerada o marco inicial da teoria.", numero: 1900, sufixo: "" },
+    { titulo: "Conceito de inconsciente", icone: "🧠", cor: "border-pink-500",
+      corpo: "Parte da mente onde ficam desejos e memórias que influenciam o comportamento sem que percebamos. Aparece em sonhos, lapsos e atos falhos." },
+    { titulo: "Importância da infância", icone: "👶", cor: "border-amber-500",
+      corpo: "Para Freud, os cinco primeiros anos de vida são decisivos para a estrutura da personalidade adulta.", numero: 5, sufixo: " anos" }
+  ];
+
+  const freudBotoes = document.getElementById("freud-botoes");
+  const freudPainel = document.getElementById("freud-painel");
+
+  function mostrarFreud(i) {
+    const t = freudTopicos[i];
+    document.querySelectorAll(".btn-freud").forEach((b, idx) => {
+      b.classList.toggle("bg-indigo-600", idx === i);
+      b.classList.toggle("text-white", idx === i);
+      b.classList.toggle("shadow-lg", idx === i);
+      b.classList.toggle("scale-105", idx === i);
+      b.classList.toggle("bg-white", idx !== i);
+    });
+    freudPainel.className = `relative overflow-hidden bg-white rounded-2xl p-6 shadow-sm min-h-[180px] border-l-8 ${t.cor} painel-surgir`;
+    freudPainel.innerHTML = `
+      <span class="blob absolute -right-6 -bottom-6 w-28 h-28 rounded-full bg-indigo-100"></span>
+      <p class="relative text-4xl mb-2">${t.icone}</p>
+      <h3 class="relative text-2xl font-bold text-slate-800 mb-3">${t.titulo}</h3>
+      <p class="relative text-slate-600 leading-relaxed">${t.corpo}</p>
+      ${t.numero !== undefined ? `<p class="relative mt-4 text-4xl font-extrabold text-indigo-600"><span id="freud-num">0</span>${t.sufixo}</p>` : ""}`;
+    if (t.numero !== undefined) {
+      animarContador({ dataset: { target: t.numero }, set textContent(v) { document.getElementById("freud-num").textContent = v; } });
+    }
+  }
+
+  freudTopicos.forEach((t, i) => {
+    const b = document.createElement("button");
+    b.className = "btn-freud transition-transform duration-200 bg-white border border-indigo-200 text-indigo-700 font-semibold px-4 py-2 rounded-full hover:bg-indigo-50 hover:-translate-y-1 active:scale-95";
+    b.textContent = `${t.icone} ${t.titulo}`;
+    b.addEventListener("click", () => mostrarFreud(i));
+    freudBotoes.appendChild(b);
+  });
+  mostrarFreud(0);
+
+  // ---------- NAVEGAÇÃO ATIVA ----------
+  const links = document.querySelectorAll(".nav-link");
+  const secoes = [...document.querySelectorAll("main section[id]")];
+  window.addEventListener("scroll", () => {
+    let atual = secoes[0].id;
+    secoes.forEach(s => {
+      if (s.getBoundingClientRect().top <= 120) atual = s.id;
+    });
+    links.forEach(l => l.classList.toggle("ativo", l.getAttribute("href") === "#" + atual));
+  }, { passive: true });
+
+  // ---------- FASES ----------
+  const fases = [
+    {
+      nome: "Oral",
+      idade: "0 a 1 ano",
+      cor: "border-sky-500",
+      descricao: "A principal fonte de prazer e exploração está na boca: sucção, alimentação e contato com o seio ou mamadeira.",
+      exemplo: "Bebês levam objetos à boca para conhecê-los.",
+      dica: "Frustrações nessa fase podem se relacionar a traços de dependência ou ansiedade."
+    },
+    {
+      nome: "Anal",
+      idade: "1 a 3 anos",
+      cor: "border-emerald-500",
+      descricao: "O prazer passa a se concentrar no controle esfincteriano, ligado ao treinamento da higiene e às primeiras regras impostas pelos adultos.",
+      exemplo: "A criança aprende a controlar o momento de evacuar e sente orgulho ao conseguir.",
+      dica: "Para Freud, o modo como o treino é conduzido influencia traços como organização e controle."
+    },
+    {
+      nome: "Fálica",
+      idade: "3 a 6 anos",
+      cor: "border-amber-500",
+      descricao: "O interesse se volta para os órgãos genitais e para as diferenças entre os sexos. Surge o Complexo de Édipo: desejo pelo genitor do sexo oposto e rivalidade com o do mesmo sexo.",
+      exemplo: "A criança imita o adulto do mesmo sexo e quer ser 'a pessoa preferida' do outro genitor.",
+      dica: "A resolução do Édipo leva à identificação com o genitor do mesmo sexo e à formação do superego."
+    },
+    {
+      nome: "Latência",
+      idade: "6 anos até a puberdade",
+      cor: "border-violet-500",
+      descricao: "Os impulsos sexuais permanecem adormecidos. A energia é direcionada para a escola, amizades, esportes e aprendizagem.",
+      exemplo: "Crianças dessa idade costumam formar grupos do mesmo sexo e se dedicar a jogos e estudos.",
+      dica: "Esta fase é vista como um período de consolidação de habilidades sociais e intelectuais."
+    },
+    {
+      nome: "Genital",
+      idade: "Puberdade em diante",
+      cor: "border-rose-500",
+      descricao: "Os impulsos sexuais voltam com força e são direcionados a relações afetivas e sexuais maduras, com outra pessoa.",
+      exemplo: "Interesse por relacionamentos amorosos e construção de vínculos de intimidade.",
+      dica: "Para Freud, esta fase integra as experiências anteriores em uma sexualidade madura."
+    }
+  ];
+
+  const botoesFases = document.getElementById("fases-botoes");
+  const detalheFase = document.getElementById("fase-detalhe");
+  const progressoFases = document.getElementById("fases-progresso");
+
+  function mostrarFase(i) {
+    const f = fases[i];
+    document.querySelectorAll(".btn-fase").forEach((b, idx) => {
+      b.classList.toggle("bg-indigo-600", idx === i);
+      b.classList.toggle("text-white", idx === i);
+      b.classList.toggle("shadow-lg", idx === i);
+      b.classList.toggle("bg-white", idx !== i);
+    });
+    progressoFases.style.width = ((i + 1) / fases.length * 100) + "%";
+    detalheFase.className = `bg-white rounded-2xl p-6 shadow-sm border-l-8 ${f.cor} painel-surgir`;
+    detalheFase.innerHTML = `
+      <p class="text-sm font-semibold text-slate-500">Idade aproximada: ${f.idade}</p>
+      <h3 class="text-2xl font-bold text-slate-800 mb-3">Fase ${f.nome}</h3>
+      <p class="text-slate-600 mb-4">${f.descricao}</p>
+      <div class="grid md:grid-cols-2 gap-4">
+        <div class="card-hover bg-slate-50 rounded-xl p-4"><p class="text-xs font-bold uppercase text-slate-500 mb-1">Exemplo observável</p><p class="text-sm text-slate-700">${f.exemplo}</p></div>
+        <div class="card-hover bg-slate-50 rounded-xl p-4"><p class="text-xs font-bold uppercase text-slate-500 mb-1">Ponto de atenção</p><p class="text-sm text-slate-700">${f.dica}</p></div>
+      </div>`;
+  }
+
+  fases.forEach((f, i) => {
+    const b = document.createElement("button");
+    b.className = "btn-fase bg-white border border-indigo-200 text-indigo-700 font-semibold px-4 py-2 rounded-full hover:bg-indigo-50";
+    b.textContent = f.nome;
+    b.addEventListener("click", () => mostrarFase(i));
+    botoesFases.appendChild(b);
+  });
+  mostrarFase(0);
+
+  // ---------- INSTÂNCIAS ----------
+  const instancias = [
+    { nome: "Id", icone: "🔥", principio: "Princípio do prazer", cor: "bg-rose-500",
+      texto: "Totalmente inconsciente. Busca satisfação imediata de desejos e impulsos básicos, sem considerar regras ou limites. Está presente desde o nascimento." },
+    { nome: "Ego", icone: "⚖️", principio: "Princípio da realidade", cor: "bg-sky-500",
+      texto: "Parte consciente que media o id e o mundo externo. Avalia a realidade, planeja e busca formas socialmente aceitáveis de satisfazer os impulsos." },
+    { nome: "Superego", icone: "🧭", principio: "Princípio moral", cor: "bg-amber-500",
+      texto: "Internaliza regras, valores e normas dos pais e da sociedade. Gera sentimentos de culpa quando as regras são desrespeitadas e orgulho quando são seguidas." }
+  ];
+  const instDiv = document.getElementById("instancias");
+  instancias.forEach((inst, i) => {
+    const card = document.createElement("div");
+    card.className = "reveal instancia-card bg-white rounded-2xl p-6 shadow-sm cursor-pointer";
+    card.style.transitionDelay = (i * 0.1) + "s";
+    card.innerHTML = `
+      <div class="bolha ${inst.cor} w-20 h-20 rounded-full mb-4 flex items-center justify-center text-4xl shadow-lg" style="animation: flutuar ${4 + i}s ease-in-out infinite">${inst.icone}</div>
+      <h3 class="text-xl font-bold mb-1">${inst.nome}</h3>
+      <p class="text-sm font-semibold text-indigo-600 mb-3">${inst.principio}</p>
+      <p class="instancia-texto text-slate-600 text-sm">${inst.texto}</p>
+      <p class="text-xs text-slate-400 mt-3 inst-hint">Clique para ver mais</p>`;
+    card.addEventListener("click", () => {
+      visitadas.add(inst.nome);
+      verificarDesbloqueio();
+      const t = card.querySelector(".instancia-texto");
+      const h = card.querySelector(".inst-hint");
+      const aberto = t.classList.toggle("aberto");
+      h.textContent = aberto ? "Clique para recolher" : "Clique para ver mais";
+    });
+    instDiv.appendChild(card);
+    observadorRevelar.observe(card);
+  });
+
+  // ---------- CURIOSIDADES ----------
+  const curiosidades = [
+    "Freud estudou a sexualidade infantil de forma inovadora para a época, propondo que crianças também têm impulsos e prazeres ligados ao corpo.",
+    "O termo 'Édipo' vem da mitologia grega: Édipo, sem saber, matou o pai e casou-se com a mãe. Freud usou essa história para nomear o complexo da fase fálica.",
+    "Freud atendia muitos pacientes em seu consultório em Viena, onde utilizava o famoso divã, pensado para favorecer a livre associação de ideias.",
+    "Para Freud, a fala espontânea, os lapsos e os sonhos revelavam conteúdos do inconsciente, por isso eram valorizados na análise.",
+    "Freud fugiu de Viena em 1938, durante a ocupação nazista, e morreu em Londres no ano seguinte.",
+    "A teoria psicossexual sofreu muitas críticas e revisões ao longo do século XX, mas continua sendo um marco histórico da psicologia e da psicanálise."
+  ];
+  const TEMPO_CURIOSIDADE = 7000;
+  let indiceCuriosidade = 0;
+  let timerCuriosidade = null;
+  const textoCuriosidade = document.getElementById("curiosidade-texto");
+  const contadorCuriosidade = document.getElementById("curiosidade-contador");
+  const barraCuriosidade = document.getElementById("curiosidade-barra");
+
+  function mostrarCuriosidade() {
+    textoCuriosidade.style.opacity = 0;
+    setTimeout(() => {
+      textoCuriosidade.textContent = curiosidades[indiceCuriosidade];
+      textoCuriosidade.style.opacity = 1;
+    }, 300);
+    contadorCuriosidade.textContent = `${indiceCuriosidade + 1} de ${curiosidades.length}`;
+    barraCuriosidade.classList.remove("barra-anim");
+    void barraCuriosidade.offsetWidth;
+    barraCuriosidade.classList.add("barra-anim");
+  }
+
+  function agendarCuriosidade() {
+    clearTimeout(timerCuriosidade);
+    timerCuriosidade = setTimeout(() => {
+      indiceCuriosidade = (indiceCuriosidade + 1) % curiosidades.length;
+      mostrarCuriosidade();
+      agendarCuriosidade();
+    }, TEMPO_CURIOSIDADE);
+  }
+
+  document.getElementById("btn-curiosidade").addEventListener("click", () => {
+    indiceCuriosidade = (indiceCuriosidade + 1) % curiosidades.length;
+    mostrarCuriosidade();
+    agendarCuriosidade();
+  });
+
+  mostrarCuriosidade();
+  agendarCuriosidade();
+
+  // ---------- QUIZ ----------
+  const perguntas = [
+    { q: "Na fase oral, a principal fonte de prazer da criança está na boca, como na sucção e na alimentação.", resposta: true,
+      explicacao: "Correto. Nos primeiros meses de vida, a boca é a principal zona de prazer e de exploração do mundo." },
+    { q: "A fase anal ocorre aproximadamente entre 1 e 3 anos e está relacionada ao controle esfincteriano.", resposta: true,
+      explicacao: "Correto. O treinamento para controlar as eliminações é o eixo central desta fase, segundo Freud." },
+    { q: "Freud afirmava que crianças não possuem qualquer tipo de sexualidade.", resposta: false,
+      explicacao: "Errado. Justamente o oposto: Freud defendia que a sexualidade infantil existe desde cedo, mas é diferente da sexualidade adulta, que é genital e voltada a outra pessoa." },
+    { q: "O Complexo de Édipo ocorre na fase de latência.", resposta: false,
+      explicacao: "Errado. O Complexo de Édipo ocorre na fase fálica (3 a 6 anos). Na latência, os impulsos sexuais ficam adormecidos." },
+    { q: "Na fase de latência, a energia da criança tende a se direcionar para a escola, amizades e atividades.", resposta: true,
+      explicacao: "Correto. Como os impulsos sexuais ficam em segundo plano, a energia vai para aprendizagem e socialização." },
+    { q: "O id é regido pelo princípio da realidade e busca avaliar as consequências antes de agir.", resposta: false,
+      explicacao: "Errado. Quem segue o princípio da realidade é o ego. O id segue o princípio do prazer, buscando satisfação imediata." },
+    { q: "O superego internaliza regras, valores e normas morais, e pode gerar sentimento de culpa.", resposta: true,
+      explicacao: "Correto. O superego representa a moral internalizada, incluindo a consciência e o ideal do ego." },
+    { q: "Para Freud, experiências vividas na infância podem influenciar a personalidade na vida adulta.", resposta: true,
+      explicacao: "Correto. Um dos pilares da teoria freudiana é a ideia de que a infância é decisiva para a formação psíquica." },
+    { q: "A fase genital começa após o término da fase fálica, ainda na primeira infância.", resposta: false,
+      explicacao: "Errado. A fase genital começa na puberdade e vai até a vida adulta. Antes dela existem as fases de latência e fálica." }
+  ];
+
+  let pontos = 0;
+  let respondidas = 0;
+  const quizContainer = document.getElementById("quiz-container");
+  const pontuacaoEl = document.getElementById("pontuacao");
+  const totalEl = document.getElementById("total-questoes");
+  const resultadoFinal = document.getElementById("resultado-final");
+  const resultadoTexto = document.getElementById("resultado-texto");
+  const quizProgresso = document.getElementById("quiz-progresso");
+
+  function atualizarPontuacao() {
+    pontuacaoEl.textContent = pontos;
+    pontuacaoEl.classList.remove("pulsar");
+    void pontuacaoEl.offsetWidth;
+    pontuacaoEl.classList.add("pulsar");
+  }
+
+  function renderQuiz() {
+    quizContainer.innerHTML = "";
+    pontos = 0;
+    respondidas = 0;
+    pontuacaoEl.textContent = 0;
+    totalEl.textContent = perguntas.length;
+    quizProgresso.style.width = "0%";
+    resultadoFinal.classList.add("hidden");
+
+    perguntas.forEach((p, i) => {
+      const card = document.createElement("div");
+      card.className = "reveal card-hover bg-white rounded-2xl p-6 shadow-sm";
+      card.innerHTML = `
+        <p class="text-sm font-semibold text-indigo-600 mb-1">Questão ${i + 1}</p>
+        <p class="text-lg text-slate-800 mb-4">${p.q}</p>
+        <div class="flex gap-3">
+          <button data-valor="true" class="btn-resp flex-1 bg-emerald-500 hover:bg-emerald-600 hover:scale-[1.02] active:scale-95 text-white font-semibold py-2 rounded-xl transition-transform">Verdadeiro</button>
+          <button data-valor="false" class="btn-resp flex-1 bg-rose-500 hover:bg-rose-600 hover:scale-[1.02] active:scale-95 text-white font-semibold py-2 rounded-xl transition-transform">Falso</button>
+        </div>
+        <div class="feedback hidden mt-4 rounded-xl p-4 text-sm"></div>`;
+
+      card.querySelectorAll(".btn-resp").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const escolha = btn.dataset.valor === "true";
+          const feedback = card.querySelector(".feedback");
+          if (!feedback.classList.contains("hidden")) return;
+
+          card.querySelectorAll(".btn-resp").forEach(b => {
+            b.disabled = true;
+            b.classList.add("opacity-60", "cursor-not-allowed");
+          });
+          respondidas++;
+          quizProgresso.style.width = (respondidas / perguntas.length * 100) + "%";
+
+          if (escolha === p.resposta) {
+            pontos++;
+            atualizarPontuacao();
+            feedback.className = "feedback painel-surgir mt-4 rounded-xl p-4 text-sm bg-emerald-50 text-emerald-800 border border-emerald-200";
+            feedback.innerHTML = `<p class="font-bold text-base mb-1">🎉 Parabéns! Você acertou.</p><p>${p.explicacao}</p>`;
+          } else {
+            card.classList.add("tremer");
+            feedback.className = "feedback painel-surgir mt-4 rounded-xl p-4 text-sm bg-rose-50 text-rose-800 border border-rose-200";
+            const correta = p.resposta ? "Verdadeiro" : "Falso";
+            feedback.innerHTML = `<p class="font-bold text-base mb-1">❌ Errado. A alternativa correta é "${correta}".</p><p>${p.explicacao}</p>`;
+          }
+
+          if (respondidas === perguntas.length) {
+            resultadoFinal.classList.remove("hidden");
+            resultadoFinal.classList.add("painel-surgir");
+            resultadoTexto.textContent = `Você acertou ${pontos} de ${perguntas.length} questões.`;
+          }
+        });
+      });
+      quizContainer.appendChild(card);
+      observadorRevelar.observe(card);
+    });
+  }
+
+  document.getElementById("btn-reiniciar").addEventListener("click", renderQuiz);
+  renderQuiz();
+
+  // ---------- BOTÃO PROIBIDO E DESTRUIÇÃO ----------
+  const visitadas = new Set();
+  let destruido = false;
+  let cliquesPerigo = 0;
+  let emContagem = false;
+  const SELETOR_PAGINA = "header, nav, main > section, footer, #barra-progresso";
+  const frasesFreud = [
+    "Não faça isso...",
+    "Isso é o Id falando!",
+    "Cuidado com o impulso!",
+    "Seu Superego está chorando...",
+    "Respire e acione o Ego!",
+    "Último aviso!"
+  ];
+
+  function verificarDesbloqueio() {
+    if (destruido || visitadas.size < 3) return;
+    const area = document.getElementById("area-botao-perigo");
+    if (area.querySelector("#btn-perigo")) return;
+    const btn = document.createElement("button");
+    btn.id = "btn-perigo";
+    btn.textContent = "Não clique aqui";
+    btn.className = "bg-rose-600 hover:bg-rose-700 text-white font-bold px-8 py-3 rounded-full shadow-lg hover:scale-110 active:scale-95 transition-transform";
+    btn.addEventListener("click", cliquePerigo);
+    area.appendChild(btn);
+    btn.animate([
+      { transform: "scale(0) rotate(-30deg)" },
+      { transform: "scale(1.15) rotate(5deg)" },
+      { transform: "scale(1)" }
+    ], { duration: 700, easing: "ease-out" });
+  }
+
+  function miniFreud() {
+    const d = document.createElement("div");
+    const frase = frasesFreud[Math.floor(Math.random() * frasesFreud.length)];
+    d.style.cssText = `position:fixed;z-index:95;pointer-events:none;display:flex;align-items:center;gap:8px;left:${10 + Math.random() * 70}vw;top:${15 + Math.random() * 55}vh;`;
+    d.innerHTML = `<img src="imagens/freud.jpg" alt="Freud" style="width:76px;height:76px;object-fit:contain;background:#fff;border-radius:50%;border:3px solid #6366f1;padding:4px;"><span style="background:#fff;color:#312e81;padding:8px 12px;border-radius:14px;font-weight:600;font-size:14px;box-shadow:0 8px 20px rgba(0,0,0,.35);max-width:200px;">${frase}</span>`;
+    document.body.appendChild(d);
+    d.animate([
+      { transform: "scale(0) rotate(-20deg)", opacity: 0 },
+      { transform: "scale(1.1) rotate(4deg)", opacity: 1, offset: 0.3 },
+      { transform: "scale(1)", opacity: 1, offset: 0.8 },
+      { transform: "scale(.9) translateY(-20px)", opacity: 0 }
+    ], { duration: 2600, fill: "forwards" }).onfinish = () => d.remove();
+  }
+
+  function cliquePerigo() {
+    if (emContagem || destruido) return;
+    cliquesPerigo++;
+    miniFreud();
+    const btn = document.getElementById("btn-perigo");
+    btn.animate([
+      { transform: "translateX(0)" },
+      { transform: "translateX(-8px)" },
+      { transform: "translateX(8px)" },
+      { transform: "translateX(-6px)" },
+      { transform: "translateX(0)" }
+    ], { duration: 350 });
+    if (cliquesPerigo >= 5) {
+      emContagem = true;
+      btn.disabled = true;
+      btn.style.opacity = "0.5";
+      iniciarContagem();
+    }
+  }
+
+  function iniciarContagem() {
+    const c = document.getElementById("contagem");
+    const n = document.getElementById("contagem-num");
+    c.style.display = "flex";
+    let t = 5;
+    const pulso = () => n.animate([
+      { transform: "scale(1.8)", opacity: 0 },
+      { transform: "scale(1)", opacity: 1 }
+    ], { duration: 700, easing: "ease-out" });
+    n.textContent = t;
+    pulso();
+    const timer = setInterval(() => {
+      t--;
+      if (t > 0) {
+        n.textContent = t;
+        pulso();
+        return;
+      }
+      clearInterval(timer);
+      c.style.display = "none";
+      explodir();
+    }, 1000);
+  }
+
+  function raio(fx) {
+    const ns = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(ns, "svg");
+    const x = Math.random() * innerWidth;
+    svg.setAttribute("viewBox", "0 0 100 600");
+    svg.setAttribute("preserveAspectRatio", "none");
+    svg.style.cssText = `position:absolute;left:${x - 60}px;top:0;width:120px;height:100%;`;
+    const pts = [];
+    for (let i = 0; i <= 10; i++) pts.push(`${50 + (Math.random() - 0.5) * 50},${i * 60}`);
+    svg.innerHTML = `<polyline points="${pts.join(" ")}" fill="none" stroke="#fde047" stroke-width="3" style="filter:drop-shadow(0 0 8px #facc15)"/>`;
+    fx.appendChild(svg);
+    svg.animate([
+      { opacity: 0 }, { opacity: 1 }, { opacity: 0.3 }, { opacity: 1 }, { opacity: 0 }
+    ], { duration: 700, delay: Math.random() * 400, fill: "both" }).onfinish = () => svg.remove();
+  }
+
+  function fumaca(fx) {
+    const f = document.createElement("div");
+    const s = 120 + Math.random() * 180;
+    f.style.cssText = `position:absolute;left:${Math.random() * innerWidth - s / 2}px;top:${innerHeight * 0.6 + Math.random() * innerHeight * 0.4}px;width:${s}px;height:${s}px;border-radius:50%;background:radial-gradient(circle,rgba(150,150,150,.85),rgba(60,60,60,0) 70%);filter:blur(6px);`;
+    fx.appendChild(f);
+    f.animate([
+      { transform: "translateY(0) scale(.4)", opacity: 0 },
+      { opacity: 0.85, offset: 0.3 },
+      { transform: `translateY(-${innerHeight * 0.5}px) scale(2.5)`, opacity: 0 }
+    ], { duration: 2600 + Math.random() * 1200, delay: Math.random() * 600, easing: "ease-out", fill: "both" }).onfinish = () => f.remove();
+  }
+
+  function explodir() {
+    const fx = document.getElementById("fx-camada");
+    const cx = innerWidth / 2, cy = innerHeight / 2;
+
+    const flash = document.createElement("div");
+    flash.style.cssText = "position:absolute;inset:0;background:#fff;";
+    fx.appendChild(flash);
+    flash.animate([{ opacity: 0 }, { opacity: 1 }, { opacity: 0 }], { duration: 600 }).onfinish = () => flash.remove();
+
+    const boom = document.createElement("div");
+    boom.textContent = "BOOM!";
+    boom.style.cssText = "position:absolute;left:50%;top:45%;font-size:9rem;font-weight:900;color:#fde047;text-shadow:0 0 30px #f97316;white-space:nowrap;";
+    fx.appendChild(boom);
+    boom.animate([
+      { transform: "translate(-50%,-50%) scale(.2)", opacity: 0 },
+      { transform: "translate(-50%,-50%) scale(1.2)", opacity: 1, offset: 0.4 },
+      { transform: "translate(-50%,-50%) scale(1)", opacity: 0 }
+    ], { duration: 1400, fill: "forwards" }).onfinish = () => boom.remove();
+
+    const cores = ["#f97316", "#facc15", "#ef4444", "#818cf8", "#f472b6"];
+    for (let i = 0; i < 70; i++) {
+      const p = document.createElement("span");
+      const tam = 6 + Math.random() * 14;
+      const cor = cores[i % cores.length];
+      p.style.cssText = `position:absolute;left:${cx - tam / 2}px;top:${cy - tam / 2}px;width:${tam}px;height:${tam}px;border-radius:50%;background:${cor};box-shadow:0 0 12px ${cor};`;
+      fx.appendChild(p);
+      const ang = Math.random() * Math.PI * 2;
+      const dist = 150 + Math.random() * 450;
+      p.animate([
+        { transform: "translate(0,0) scale(1)", opacity: 1 },
+        { transform: `translate(${Math.cos(ang) * dist}px,${Math.sin(ang) * dist}px) scale(.2)`, opacity: 0 }
+      ], { duration: 900 + Math.random() * 700, easing: "cubic-bezier(.1,.8,.3,1)", fill: "forwards" }).onfinish = () => p.remove();
+    }
+
+    for (let i = 0; i < 5; i++) raio(fx);
+    for (let i = 0; i < 16; i++) fumaca(fx);
+
+    document.body.animate([
+      { transform: "translate(0,0)" },
+      { transform: "translate(-10px,6px)" },
+      { transform: "translate(10px,-6px)" },
+      { transform: "translate(0,0)" }
+    ], { duration: 500 });
+
+    setTimeout(colapsar, 300);
+    setTimeout(mostrarTelaPreta, 2200);
+  }
+
+  function colapsar() {
+    document.querySelectorAll(SELETOR_PAGINA).forEach((el) => {
+      const dx = (Math.random() - 0.5) * 500;
+      const dy = 300 + Math.random() * 700;
+      const rot = (Math.random() - 0.5) * 80;
+      el.animate([
+        { transform: "translate(0,0) rotate(0deg)", opacity: 1, offset: 0 },
+        { transform: "translate(-6px,2px) rotate(-1deg)", offset: 0.15 },
+        { transform: "translate(6px,-2px) rotate(1deg)", offset: 0.3 },
+        { transform: `translate(${dx}px,${dy}px) rotate(${rot}deg) scale(.2)`, opacity: 0 }
+      ], { duration: 1600, delay: Math.random() * 400, easing: "ease-in", fill: "forwards" });
+    });
+  }
+
+  function mostrarTelaPreta() {
+    const tp = document.getElementById("tela-preta");
+    const img = document.getElementById("freud-final");
+    const texto = document.getElementById("freud-explicacao");
+    const btnR = document.getElementById("btn-restaurar");
+    document.getElementById("fx-camada").innerHTML = "";
+    const explicacao = "Você sentiu um desejo forte de clicar no botão, mesmo sabendo que não devia. Esse é o Id, que quer satisfação imediata e ignora regras. O Ego percebe o risco e tenta segurar o impulso, negociando com a realidade e exercendo o autocontrole. Já o Superego traz a moral aprendida e é ele que pesa a culpa quando o impulso vence. Para Freud, a personalidade equilibrada nasce desse diálogo entre desejo, autocontrole e moral.";
+
+    tp.style.display = "flex";
+    tp.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 900, fill: "forwards" });
+    img.animate([
+      { transform: "scale(.3) rotate(-10deg)", opacity: 0 },
+      { transform: "scale(1.05) rotate(2deg)", opacity: 1, offset: 0.7 },
+      { transform: "scale(1)", opacity: 1 }
+    ], { duration: 1000, delay: 700, easing: "ease-out", fill: "both" });
+
+    setTimeout(() => {
+      texto.textContent = explicacao;
+      texto.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 800, fill: "both" });
+    }, 1200);
+
+    btnR.style.display = "none";
+    setTimeout(() => {
+      img.insertAdjacentElement("afterend", btnR);
+      btnR.style.display = "block";
+      btnR.animate([
+        { transform: "scale(0)", opacity: 0 },
+        { transform: "scale(1.1)", opacity: 1, offset: 0.7 },
+        { transform: "scale(1)", opacity: 1 }
+      ], { duration: 600, easing: "ease-out" });
+    }, 6200);
+  }
+
+  function restaurar() {
+    destruido = true;
+    document.getElementById("area-botao-perigo").innerHTML = "";
+    document.getElementById("btn-restaurar").style.display = "none";
+    document.getElementById("fx-camada").innerHTML = "";
+
+    const tp = document.getElementById("tela-preta");
+    tp.getAnimations().forEach((a) => a.cancel());
+    tp.style.display = "none";
+    document.querySelectorAll(".reveal").forEach((el) => el.classList.add("visivel"));
+
+    document.querySelectorAll(SELETOR_PAGINA).forEach((el, i) => {
+      el.getAnimations().forEach((a) => a.cancel());
+      el.animate([
+        { transform: "translate(0,300px) rotate(30deg) scale(.2)", opacity: 0 },
+        { transform: "translate(0,-30px) rotate(-3deg) scale(1.05)", opacity: 1, offset: 0.7 },
+        { transform: "none", opacity: 1 }
+      ], { duration: 1000, delay: i * 120, easing: "cubic-bezier(.2,.9,.3,1)" });
+    });
+  }
+
+  document.getElementById("btn-restaurar").addEventListener("click", restaurar);
+</script></body></html>
