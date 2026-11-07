@@ -6,98 +6,207 @@
 <title>Aula da Saudade - Eleições da Turma</title>
 <style>
   * { box-sizing: border-box; }
+  :root { --a: #a78bfa; --b: #f472b6; --c: #fbbf24; --txt: #f8fafc; --mut: #cbd5e1; }
   body {
     margin: 0;
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    background: linear-gradient(135deg, #fef3c7, #fbcfe8 50%, #c7d2fe);
     min-height: 100vh;
-    color: #1f2937;
-    padding: 24px 16px;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--txt);
+    background:
+      radial-gradient(circle at 15% 10%, #4c1d95 0, transparent 40%),
+      radial-gradient(circle at 85% 90%, #be185d 0, transparent 40%),
+      linear-gradient(160deg, #0f0a2e, #1e1b4b 60%, #0b1020);
+    padding: 28px 16px 48px;
   }
-  .container { max-width: 640px; margin: 0 auto; }
-  header { text-align: center; margin-bottom: 24px; }
-  header h1 { font-size: 2rem; margin: 0 0 6px; color: #7c2d12; }
-  header p { margin: 0; color: #4b5563; }
-  .card {
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    margin-bottom: 20px;
+  .container { max-width: 680px; margin: 0 auto; }
+
+  /* Cabeçalho e logo */
+  header { text-align: center; margin-bottom: 22px; }
+  .logo {
+    width: 96px; height: 96px; margin: 0 auto 12px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.18);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 40px rgba(167,139,250,0.35);
+    animation: flutua 4s ease-in-out infinite;
   }
-  label { display: block; font-weight: 600; margin-bottom: 6px; }
-  .hint { font-size: 0.85rem; color: #6b7280; margin: 2px 0 10px; }
+  .logo svg { width: 60px; height: 60px; }
+  @keyframes flutua { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+  header h1 {
+    margin: 0; font-size: 2.2rem; letter-spacing: 0.5px;
+    background: linear-gradient(90deg, var(--a), var(--b), var(--c));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  header p { margin: 6px 0 0; color: var(--mut); }
+
+  /* Cartão de vidro */
+  .glass {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-radius: 22px;
+    padding: 26px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+  }
+
+  /* Progresso */
+  .progresso { height: 8px; border-radius: 99px; background: rgba(255,255,255,0.1); overflow: hidden; margin-bottom: 8px; }
+  #barra { height: 100%; width: 0; background: linear-gradient(90deg, var(--a), var(--b), var(--c)); transition: width 0.4s ease; }
+  .contador { font-size: 0.85rem; color: var(--mut); text-align: right; margin-bottom: 18px; }
+
+  /* Passos */
+  .step { display: none; }
+  .step.ativo { display: block; animation: entra 0.45s ease; }
+  @keyframes entra { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .step-emoji { font-size: 3.2rem; text-align: center; margin: 4px 0; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3)); }
+  .step h2 { margin: 0 0 6px; text-align: center; font-size: 1.5rem; }
+  .hint { text-align: center; color: var(--mut); font-size: 0.92rem; margin: 0 0 20px; }
+  .intro-texto { text-align: center; color: #e2e8f0; line-height: 1.6; margin: 0 0 8px; }
+
+  label { display: block; font-weight: 600; margin: 4px 0 6px; color: #e2e8f0; font-size: 0.95rem; }
   input[type="text"], select {
     width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #d1d5db;
-    border-radius: 10px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: rgba(15,10,46,0.55);
+    color: var(--txt);
     font-size: 1rem;
-    background: #ffffff;
+    outline: none;
+    transition: 0.2s;
+  }
+  select option { background: #1e1b4b; color: #f8fafc; }
+  input[type="text"]::placeholder { color: #94a3b8; }
+  input[type="text"]:focus, select:focus { border-color: var(--b); box-shadow: 0 0 0 4px rgba(244,114,182,0.25); }
+
+  .pos-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 12px 14px;
     margin-bottom: 12px;
   }
-  input[type="text"]:focus, select:focus { outline: none; border-color: #f97316; box-shadow: 0 0 0 3px #fed7aa; }
-  .categoria { padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid #f3e8e0; }
-  .categoria:last-of-type { border-bottom: none; margin-bottom: 0; }
-  .cat-title { font-size: 1.1rem; font-weight: 700; color: #9a3412; margin: 0 0 10px; }
-  .cat-emoji { font-size: 1.4rem; margin-right: 6px; }
-  button {
-    width: 100%;
-    padding: 14px;
-    border: none;
-    border-radius: 12px;
-    background: #ea580c;
-    color: #fff;
-    font-size: 1.05rem;
-    font-weight: 700;
-    cursor: pointer;
-  }
-  button:hover { background: #c2410c; }
+  .pos-card label { margin: 0 0 6px; }
+
+  /* Mensagens */
   .msg {
     display: none;
     padding: 12px 16px;
-    border-radius: 10px;
-    background: #dcfce7;
-    color: #166534;
+    border-radius: 12px;
+    background: rgba(34,197,94,0.18);
+    border: 1px solid rgba(34,197,94,0.5);
+    color: #bbf7d0;
     font-weight: 600;
-    margin-bottom: 16px;
+    margin: 0 0 16px;
     text-align: center;
   }
-  .msg.erro { background: #fee2e2; color: #991b1b; }
+  .msg.erro { background: rgba(239,68,68,0.18); border-color: rgba(239,68,68,0.55); color: #fecaca; }
   .msg.show { display: block; }
+
+  /* Resumo final */
+  .resumo { list-style: none; padding: 0; margin: 0 0 12px; }
+  .resumo li {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+  .resumo strong { color: #f0abfc; }
+
+  /* Botões */
+  .nav { display: flex; gap: 12px; margin-top: 22px; }
+  .btn {
+    flex: 1; padding: 14px; border: none; border-radius: 14px;
+    font-size: 1rem; font-weight: 700; cursor: pointer; color: #fff;
+    transition: transform 0.15s, filter 0.2s;
+  }
+  .btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+  .btn[hidden] { display: none; }
+  .btn-prim { background: linear-gradient(90deg, #7c3aed, #db2777); }
+  .btn-sec { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); }
+  .btn-env { background: linear-gradient(90deg, #f59e0b, #ec4899, #8b5cf6); }
+
+  /* Resultados */
+  .secao-resultados h2 { margin: 0 0 6px; font-size: 1.3rem; }
   .resultado-cat { margin-bottom: 16px; }
-  .resultado-cat h3 { margin: 0 0 6px; font-size: 1rem; color: #7c2d12; }
-  .resultado-cat ul { margin: 0; padding-left: 20px; }
+  .resultado-cat h3 { margin: 0 0 6px; font-size: 1rem; color: #f0abfc; }
+  .resultado-cat ul { margin: 0; padding-left: 20px; color: #e2e8f0; }
   .resultado-cat li { margin: 2px 0; }
-  .vazio { color: #6b7280; font-style: italic; }
+  .vazio { color: #94a3b8; font-style: italic; }
+  .rodape { text-align: center; color: #64748b; font-size: 0.8rem; margin-top: 18px; }
 </style>
 </head>
 <body>
 <div class="container">
 
   <header>
-    <h1>🎓 Aula da Saudade da Psicologia</h1>
-    <p>Vote nos seus colegas de turma!</p>
+    <div class="logo" aria-label="Símbolo da Psicologia">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <defs>
+          <linearGradient id="gradPsi" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#c4b5fd"/>
+            <stop offset="50%" stop-color="#f9a8d4"/>
+            <stop offset="100%" stop-color="#fde68a"/>
+          </linearGradient>
+        </defs>
+        <path d="M50 18 V86" fill="none" stroke="url(#gradPsi)" stroke-width="7" stroke-linecap="round"/>
+        <path d="M50 56 C 36 46, 26 36, 22 20" fill="none" stroke="url(#gradPsi)" stroke-width="7" stroke-linecap="round"/>
+        <path d="M50 56 C 64 46, 74 36, 78 20" fill="none" stroke="url(#gradPsi)" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <h1>Aula da Saudade</h1>
+    <p>Psicologia · Eleições da turma</p>
   </header>
 
-  <div class="card">
-    <form id="form-votacao" novalidate>
-      <label for="votante">Seu nome (opcional)</label>
-      <input type="text" id="votante" name="votante" placeholder="Quem está votando?" />
+  <div class="glass">
+    <div class="progresso"><div id="barra"></div></div>
+    <div class="contador" id="contador"></div>
 
+    <form id="form-votacao" novalidate>
+
+      <!-- Passo inicial -->
+      <section class="step">
+        <div class="step-emoji">🎓</div>
+        <h2>Bem-vindo(a)!</h2>
+        <p class="intro-texto">Você vai escolher o 1º, 2º e 3º colocados em cada categoria, uma por página. Pode deixar categorias em branco. O envio é feito no final.</p>
+        <p class="hint">Seu nome é opcional.</p>
+        <label for="votante">Seu nome (opcional)</label>
+        <input type="text" id="votante" name="votante" placeholder="Quem está votando?" />
+      </section>
+
+      <!-- Categorias (geradas pelo script) -->
       <div id="categorias"></div>
 
-      <button type="submit">Enviar votos</button>
+      <!-- Passo final: revisão e envio -->
+      <section class="step">
+        <div class="step-emoji">🏆</div>
+        <h2>Tudo pronto!</h2>
+        <p class="hint">Confira suas escolhas e envie.</p>
+        <ul class="resumo" id="resumo"></ul>
+      </section>
+
+      <div class="msg" id="mensagem" role="alert"></div>
+
+      <div class="nav">
+        <button type="button" class="btn btn-sec" id="btnVoltar">← Voltar</button>
+        <button type="button" class="btn btn-prim" id="btnProximo">Próximo →</button>
+        <button type="submit" class="btn btn-env" id="btnEnviar" hidden>Enviar votos 🎉</button>
+      </div>
     </form>
   </div>
 
-  <div class="msg" id="mensagem"></div>
-
-  <div class="card">
-    <h2 style="margin-top:0; color:#7c2d12;">📊 Resultados parciais</h2>
-    <p class="hint">Pontuação: 1º lugar = 3 pts · 2º lugar = 2 pts · 3º lugar = 1 pt</p>
+  <div class="glass secao-resultados" style="margin-top: 22px;">
+    <h2>📊 Resultados parciais</h2>
+    <p class="hint" style="text-align:left; margin: 0 0 14px;">Pontuação: 1º lugar = 3 pts · 2º lugar = 2 pts · 3º lugar = 1 pt</p>
     <div id="resultados"></div>
   </div>
+
+  <p class="rodape">Aula da Saudade · Psicologia</p>
 
 </div>
 
@@ -142,20 +251,32 @@
   const categoriasEl = document.getElementById("categorias");
   const mensagemEl = document.getElementById("mensagem");
   const resultadosEl = document.getElementById("resultados");
+  const barraEl = document.getElementById("barra");
+  const contadorEl = document.getElementById("contador");
+  const resumoEl = document.getElementById("resumo");
+  const btnVoltar = document.getElementById("btnVoltar");
+  const btnProximo = document.getElementById("btnProximo");
+  const btnEnviar = document.getElementById("btnEnviar");
 
-  // Monta os campos de cada categoria (3 posições por categoria)
+  let passo = 0;
+
+  // Monta uma página por categoria (3 posições por categoria)
   function montarFormulario() {
     categoriasEl.innerHTML = CATEGORIAS.map(c => `
-      <div class="categoria">
-        <p class="cat-title"><span class="cat-emoji">${c.emoji}</span>${c.titulo}</p>
+      <section class="step">
+        <div class="step-emoji">${c.emoji}</div>
+        <h2>${c.titulo}</h2>
+        <p class="hint">Escolha o 1º, o 2º e o 3º colocados</p>
         ${POSICOES.map(p => `
-          <label for="${c.id}-${p.num}">${p.label}</label>
-          <select id="${c.id}-${p.num}" name="${c.id}-${p.num}" data-cat="${c.id}">
-            <option value="">Selecione...</option>
-            ${PESSOAS.map(n => `<option value="${escapar(n)}">${escapar(n)}</option>`).join("")}
-          </select>
+          <div class="pos-card">
+            <label for="${c.id}-${p.num}">${p.label}</label>
+            <select id="${c.id}-${p.num}" name="${c.id}-${p.num}" data-cat="${c.id}">
+              <option value="">Selecione...</option>
+              ${PESSOAS.map(n => `<option value="${escapar(n)}">${escapar(n)}</option>`).join("")}
+            </select>
+          </div>
         `).join("")}
-      </div>
+      </section>
     `).join("");
   }
 
@@ -188,30 +309,84 @@
   function mostrarMensagem(texto, tipo) {
     mensagemEl.textContent = texto;
     mensagemEl.className = "msg show" + (tipo === "erro" ? " erro" : "");
+    mensagemEl.scrollIntoView({ behavior: "smooth", block: "center" });
     setTimeout(() => { mensagemEl.className = "msg"; }, 4000);
   }
 
-  function atualizarResultados() {
-    resultadosEl.innerHTML = CATEGORIAS.map(c => {
-      const linhas = PESSOAS
-        .map(p => {
-          const v = votos[c.id][p];
-          const pontos = v[1] * 3 + v[2] * 2 + v[3] * 1;
-          return { p, v, pontos };
-        })
-        .filter(x => x.pontos > 0)
-        .sort((a, b) => b.pontos - a.pontos);
+  // ----- Navegação entre páginas -----
+  function passos() {
+    return Array.from(formEl.querySelectorAll(".step"));
+  }
 
-      const lista = linhas.length
-        ? `<ul>${linhas.map(x =>
-            `<li>${escapar(x.p)} — 🥇 ${x.v[1]} · 🥈 ${x.v[2]} · 🥉 ${x.v[3]} (${x.pontos} pts)</li>`
-          ).join("")}</ul>`
-        : `<p class="vazio">Nenhum voto ainda.</p>`;
+  function irPara(n, rolar = true) {
+    const todos = passos();
+    const ultimo = todos.length - 1;
+    passo = Math.max(0, Math.min(n, ultimo));
 
-      return `<div class="resultado-cat"><h3>${c.emoji} ${c.titulo}</h3>${lista}</div>`;
+    todos.forEach((s, i) => s.classList.toggle("ativo", i === passo));
+
+    btnVoltar.hidden = passo === 0;
+    btnProximo.hidden = passo === ultimo;
+    btnEnviar.hidden = passo !== ultimo;
+
+    barraEl.style.width = (passo / ultimo * 100) + "%";
+    contadorEl.textContent = `Passo ${passo + 1} de ${todos.length}`;
+
+    if (passo === ultimo) renderResumo();
+    if (rolar) formEl.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  // Valida uma categoria: vazia ou com os 3 lugares preenchidos
+  function validarCategoria(c) {
+    const preenchidos = POSICOES.map(p =>
+      document.getElementById(`${c.id}-${p.num}`).value
+    ).filter(Boolean).length;
+
+    if (preenchidos > 0 && preenchidos < 3) {
+      mostrarMensagem(`Complete os 3 lugares da categoria "${c.titulo}" ou deixe-a vazia.`, "erro");
+      return false;
+    }
+    return true;
+  }
+
+  function renderResumo() {
+    resumoEl.innerHTML = CATEGORIAS.map(c => {
+      const escolhas = POSICOES.map(p => {
+        const v = document.getElementById(`${c.id}-${p.num}`).value;
+        return v ? `${p.label.split(" ")[0]} ${escapar(v)}` : null;
+      }).filter(Boolean);
+
+      const texto = escolhas.length
+        ? escolhas.join(" · ")
+        : "<em>não votou nesta categoria</em>";
+
+      return `<li><strong>${c.emoji} ${escapar(c.titulo)}</strong><br>${texto}</li>`;
     }).join("");
   }
 
+  btnProximo.addEventListener("click", () => {
+    mensagemEl.className = "msg";
+    const qtdCategorias = CATEGORIAS.length;
+    if (passo >= 1 && passo <= qtdCategorias) {
+      if (!validarCategoria(CATEGORIAS[passo - 1])) return;
+    }
+    irPara(passo + 1);
+  });
+
+  btnVoltar.addEventListener("click", () => {
+    mensagemEl.className = "msg";
+    irPara(passo - 1);
+  });
+
+  // Enter em campos não envia o formulário antes da última página
+  formEl.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && e.target.tagName !== "BUTTON") {
+      e.preventDefault();
+      if (passo < passos().length - 1) btnProximo.click();
+    }
+  });
+
+  // ----- Envio -----
   formEl.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -251,14 +426,38 @@
     atualizarTodasOpcoes();
     mostrarMensagem(`Obrigado${votante ? ", " + votante : ""}! ${registros.length} categoria(s) registrada(s). 🎉`);
     atualizarResultados();
+    irPara(0, false);
   });
+
+  // ----- Resultados -----
+  function atualizarResultados() {
+    resultadosEl.innerHTML = CATEGORIAS.map(c => {
+      const linhas = PESSOAS
+        .map(p => {
+          const v = votos[c.id][p];
+          const pontos = v[1] * 3 + v[2] * 2 + v[3] * 1;
+          return { p, v, pontos };
+        })
+        .filter(x => x.pontos > 0)
+        .sort((a, b) => b.pontos - a.pontos);
+
+      const lista = linhas.length
+        ? `<ul>${linhas.map(x =>
+            `<li>${escapar(x.p)} — 🥇 ${x.v[1]} · 🥈 ${x.v[2]} · 🥉 ${x.v[3]} (${x.pontos} pts)</li>`
+          ).join("")}</ul>`
+        : `<p class="vazio">Nenhum voto ainda.</p>`;
+
+      return `<div class="resultado-cat"><h3>${c.emoji} ${c.titulo}</h3>${lista}</div>`;
+    }).join("");
+  }
 
   montarFormulario();
   atualizarResultados();
+  irPara(0, false);
 </script>
 <script>
   // Cole aqui a URL do Apps Script (termina em /exec)
-  const URL_PLANILHA = "https://script.google.com/macros/s/AKfycbyyF8tX1zVTpgr47SvxmX7syy_U_7_yp_1_EoVycaHvD8fTm_I8E0Pd6Hvls1ZOaTtw/exec";
+  const URL_PLANILHA = "COLE_AQUI_A_URL_DO_APPS_SCRIPT";
 
   // Envia os votos para o Google Planilhas sem recarregar a página
   function enviarParaPlanilha(votante, registros) {
