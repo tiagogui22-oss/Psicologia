@@ -90,6 +90,46 @@
   }
   .pos-card label { margin: 0 0 6px; }
 
+  /* Regras de pontuação */
+  .regras p { color: #e2e8f0; line-height: 1.6; margin: 0 0 12px; font-size: 0.95rem; }
+  .regras h3 { margin: 18px 0 8px; font-size: 1.05rem; color: #f0abfc; }
+  .pontos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 14px 0 18px; }
+  .ponto {
+    text-align: center;
+    padding: 14px 8px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+  }
+  .ponto span { display: block; font-size: 1.8rem; }
+  .ponto b {
+    display: block; font-size: 1.5rem; margin: 4px 0 2px;
+    background: linear-gradient(90deg, var(--a), var(--b), var(--c));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .ponto small { color: var(--mut); font-size: 0.8rem; }
+  .regras ul { margin: 0 0 12px; padding-left: 20px; color: #e2e8f0; line-height: 1.6; font-size: 0.95rem; }
+  .exemplo {
+    margin: 14px 0;
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: rgba(251,191,36,0.1);
+    border: 1px solid rgba(251,191,36,0.35);
+    color: #fef3c7;
+    line-height: 1.6;
+    font-size: 0.92rem;
+  }
+  .destaque {
+    margin-top: 14px;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: rgba(244,114,182,0.12);
+    border: 1px solid rgba(244,114,182,0.35);
+    color: #fce7f3;
+    font-size: 0.93rem;
+    line-height: 1.6;
+  }
+
   /* Mensagens */
   .msg {
     display: none;
@@ -131,13 +171,6 @@
   .btn-sec { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); }
   .btn-env { background: linear-gradient(90deg, #f59e0b, #ec4899, #8b5cf6); }
 
-  /* Resultados */
-  .secao-resultados h2 { margin: 0 0 6px; font-size: 1.3rem; }
-  .resultado-cat { margin-bottom: 16px; }
-  .resultado-cat h3 { margin: 0 0 6px; font-size: 1rem; color: #f0abfc; }
-  .resultado-cat ul { margin: 0; padding-left: 20px; color: #e2e8f0; }
-  .resultado-cat li { margin: 2px 0; }
-  .vazio { color: #94a3b8; font-style: italic; }
   .rodape { text-align: center; color: #64748b; font-size: 0.8rem; margin-top: 18px; }
 </style>
 </head>
@@ -169,14 +202,42 @@
 
     <form id="form-votacao" novalidate>
 
-      <!-- Passo inicial -->
+      <!-- Passo 1: identificação -->
       <section class="step">
         <div class="step-emoji">🎓</div>
         <h2>Bem-vindo(a)!</h2>
         <p class="intro-texto">Você vai escolher o 1º, 2º e 3º colocados em cada categoria, uma por página. Pode deixar categorias em branco. O envio é feito no final.</p>
-        <p class="hint">Seu nome é opcional.</p>
-        <label for="votante">Seu nome (opcional)</label>
+        <p class="hint">Seu nome é obrigatório.</p>
+        <label for="votante">Seu nome</label>
         <input type="text" id="votante" name="votante" placeholder="Quem está votando?" />
+      </section>
+
+      <!-- Passo 2: regras de pontuação -->
+      <section class="step regras">
+        <div class="step-emoji">🗳️</div>
+        <h2>O Sistema de Votação e Pontuação</h2>
+        <p>O grande vencedor do jogo será decidido em uma única rodada de votação secreta. Cada jogador atua como um eleitor e deve escolher o seu Top 3 de indicados da rodada, classificando-os em 1º, 2º e 3º lugar.</p>
+        <p>Cada posição tem um peso diferente. Quanto maior a preferência, mais pontos o indicado recebe:</p>
+
+        <div class="pontos">
+          <div class="ponto"><span>🥇</span><b>100</b><small>1º lugar</small></div>
+          <div class="ponto"><span>🥈</span><b>60</b><small>2º lugar</small></div>
+          <div class="ponto"><span>🥉</span><b>20</b><small>3º lugar</small></div>
+        </div>
+
+        <p>Ao final da votação, os pontos de cada indicado são somados. A conta é simples: multiplica-se a quantidade de votos que o indicado recebeu em cada posição pelos pontos daquela posição, e soma-se tudo no fim.</p>
+
+        <div class="exemplo">
+          <strong>Exemplo:</strong> se você recebeu 2 votos de 1º lugar e 3 votos de 2º lugar:<br>
+          (2 × 100) + (3 × 60) = 200 + 180 = <strong>380 pontos</strong>.
+        </div>
+
+        <h3>Desempate</h3>
+        <p>Quem somar a maior pontuação total ganha o jogo! Se dois ou mais indicados terminarem com a mesma pontuação exata, o desempate é decidido pelos critérios abaixo, nesta ordem:</p>
+        <ul>
+          <li><strong>Mais votos de 1º lugar:</strong> ganha quem foi escolhido mais vezes como preferência máxima (100 pontos).</li>
+          <li><strong>Mais votos de 2º lugar:</strong> se o empate persistir, ganha quem recebeu mais votos de 2º lugar (60 pontos).</li>
+        </ul>
       </section>
 
       <!-- Categorias (geradas pelo script) -->
@@ -200,38 +261,60 @@
     </form>
   </div>
 
-  <div class="glass secao-resultados" style="margin-top: 22px;">
-    <h2>📊 Resultados parciais</h2>
-    <p class="hint" style="text-align:left; margin: 0 0 14px;">Pontuação: 1º lugar = 3 pts · 2º lugar = 2 pts · 3º lugar = 1 pt</p>
-    <div id="resultados"></div>
-  </div>
-
   <p class="rodape">Aula da Saudade · Psicologia</p>
 
 </div>
 
 <script>
-  // Pessoas que podem ser escolhidas
+  // Pessoas que podem ser escolhidas (ordem alfabética)
   const PESSOAS = [
+    "Annalu Lopes Rodrigues",
     "Anne Beatriz Sena",
+    "Clara Xavier Marques",
+    "Erika Laure Sabino",
+    "Gabriela Barreiros",
+    "Gracielly Santos Sá",
+    "Isabelle Kristine Lima Gomes",
     "Izabella Barbosa Primo",
     "Jaine Lopes da Silva",
-    "Vívian Nunes Vieira",
-    "Tiago Lopes Guimarães",
-    "Annalu Lopes Rodrigues",
-    "Maria Eduarda Gonçalves",
     "João Batista Vieira de Souza",
-    "Luiza Carvalho Silva"
+    "Júlia Torres Sabino",
+    "Letícia Oliveira Soares",
+    "Luanna Barroso Souza",
+    "Lucas Gabriel de Oliveira Souza",
+    "Luiza Carvalho Silva",
+    "Maria Eduarda Colen Rodrigues",
+    "Maria Eduarda Gonçalves",
+    "Maria Eduarda Pessoa Ruppin",
+    "Mayane Ramalho Silva Lima",
+    "Miriam Miranda Nogueira",
+    "Nalita Maria Camargo Soares",
+    "Nilber Vitória Tavares Martins",
+    "Raquel Balarini Handeri",
+    "Shirley Alves",
+    "Tiago Lopes Guimarães",
+    "Tiago Rodrigues (Gil)",
+    "Vitor Pereira Trega",
+    "Vívian Nunes Vieira"
   ];
 
   // Categorias do formulário. Para adicionar mais, inclua um novo objeto aqui.
   const CATEGORIAS = [
-    { id: "mais-engracado", emoji: "😂", titulo: "Mais engraçado da turma" },
-    { id: "o-que-mais-falta", emoji: "💭", titulo: "O que mais falta" },
-    { id: "nao-consegue-ficar-quieto", emoji: "🗣️", titulo: "O que não consegue ficar quieto" },
-    { id: "mais-organizado", emoji: "📋", titulo: "O mais organizado" },
-    { id: "mestre-das-apresentacoes", emoji: "🎤", titulo: "O mestre das apresentações" },
-    { id: "mais-fofoqueiro", emoji: "🤫", titulo: "O mais fofoqueiro da sala" }
+    { id: "maritaca-da-turma", emoji: "🦜", titulo: "Maritaca da turma" },
+    { id: "mais-engracado", emoji: "😂", titulo: "Mais engraçado(a)" },
+    { id: "mais-estiloso", emoji: "😎", titulo: "Mais estiloso(a)" },
+    { id: "mais-baladeiro", emoji: "🕺", titulo: "Mais baladeiro(a)" },
+    { id: "prefeito-da-turma", emoji: "🏛️", titulo: "Prefeito(a) da turma" },
+    { id: "mais-fofoqueiro", emoji: "🤫", titulo: "Mais fofoqueiro(a)" },
+    { id: "mais-perdido", emoji: "🧭", titulo: "Mais perdido(a)" },
+    { id: "rei-dos-atrasos", emoji: "⏰", titulo: "Rei ou rainha dos atrasos" },
+    { id: "mestre-das-apresentacoes", emoji: "🎤", titulo: "Mestre das apresentações" },
+    { id: "mais-dramatico", emoji: "🎭", titulo: "Mais dramático(a)" },
+    { id: "mais-parceiro", emoji: "🤝", titulo: "Mais parceiro(a)" },
+    { id: "atleta-da-turma", emoji: "🏅", titulo: "Atleta da turma" },
+    { id: "mais-blogueiro", emoji: "📱", titulo: "Mais blogueiro(a)" },
+    { id: "mais-provavel-famoso", emoji: "🌟", titulo: "Mais provável de ficar famoso(a)" },
+    { id: "mais-briguento", emoji: "🥊", titulo: "O mais briguento" }
   ];
 
   const POSICOES = [
@@ -250,7 +333,7 @@
   const formEl = document.getElementById("form-votacao");
   const categoriasEl = document.getElementById("categorias");
   const mensagemEl = document.getElementById("mensagem");
-  const resultadosEl = document.getElementById("resultados");
+
   const barraEl = document.getElementById("barra");
   const contadorEl = document.getElementById("contador");
   const resumoEl = document.getElementById("resumo");
@@ -263,9 +346,9 @@
   // Monta uma página por categoria (3 posições por categoria)
   function montarFormulario() {
     categoriasEl.innerHTML = CATEGORIAS.map(c => `
-      <section class="step">
+      <section class="step" data-catid="${c.id}">
         <div class="step-emoji">${c.emoji}</div>
-        <h2>${c.titulo}</h2>
+        <h2>${escapar(c.titulo)}</h2>
         <p class="hint">Escolha o 1º, o 2º e o 3º colocados</p>
         ${POSICOES.map(p => `
           <div class="pos-card">
@@ -366,9 +449,15 @@
 
   btnProximo.addEventListener("click", () => {
     mensagemEl.className = "msg";
-    const qtdCategorias = CATEGORIAS.length;
-    if (passo >= 1 && passo <= qtdCategorias) {
-      if (!validarCategoria(CATEGORIAS[passo - 1])) return;
+    if (passo === 0 && !document.getElementById("votante").value.trim()) {
+      mostrarMensagem("Informe seu nome para continuar.", "erro");
+      document.getElementById("votante").focus();
+      return;
+    }
+    const atual = passos()[passo];
+    if (atual && atual.dataset.catid) {
+      const c = CATEGORIAS.find(x => x.id === atual.dataset.catid);
+      if (c && !validarCategoria(c)) return;
     }
     irPara(passo + 1);
   });
@@ -389,6 +478,13 @@
   // ----- Envio -----
   formEl.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    if (!document.getElementById("votante").value.trim()) {
+      mostrarMensagem("Informe seu nome para enviar os votos.", "erro");
+      irPara(0, false);
+      document.getElementById("votante").focus();
+      return;
+    }
 
     const registros = [];
 
@@ -425,34 +521,10 @@
     formEl.reset();
     atualizarTodasOpcoes();
     mostrarMensagem(`Obrigado${votante ? ", " + votante : ""}! ${registros.length} categoria(s) registrada(s). 🎉`);
-    atualizarResultados();
     irPara(0, false);
   });
 
-  // ----- Resultados -----
-  function atualizarResultados() {
-    resultadosEl.innerHTML = CATEGORIAS.map(c => {
-      const linhas = PESSOAS
-        .map(p => {
-          const v = votos[c.id][p];
-          const pontos = v[1] * 3 + v[2] * 2 + v[3] * 1;
-          return { p, v, pontos };
-        })
-        .filter(x => x.pontos > 0)
-        .sort((a, b) => b.pontos - a.pontos);
-
-      const lista = linhas.length
-        ? `<ul>${linhas.map(x =>
-            `<li>${escapar(x.p)} — 🥇 ${x.v[1]} · 🥈 ${x.v[2]} · 🥉 ${x.v[3]} (${x.pontos} pts)</li>`
-          ).join("")}</ul>`
-        : `<p class="vazio">Nenhum voto ainda.</p>`;
-
-      return `<div class="resultado-cat"><h3>${c.emoji} ${c.titulo}</h3>${lista}</div>`;
-    }).join("");
-  }
-
   montarFormulario();
-  atualizarResultados();
   irPara(0, false);
 </script>
 <script>
@@ -461,6 +533,10 @@
 
   // Envia os votos para o Google Planilhas sem recarregar a página
   function enviarParaPlanilha(votante, registros) {
+    if (URL_PLANILHA.includes("COLE_AQUI")) {
+      alert("Falta colar a URL do Apps Script em URL_PLANILHA antes de publicar.");
+      return;
+    }
     const dados = {
       votante: votante || "Anônimo",
       registros: registros.map(r => ({
